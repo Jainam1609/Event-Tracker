@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Demo Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        button {
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        button.secondary {
+            background: #48bb78;
+        }
+        
+        button.secondary:hover {
+            background: #38a169;
+        }
+        
+        button.danger {
+            background: #f56565;
+        }
+        
+        button.danger:hover {
+            background: #e53e3e;
+        }
+        
+        .info-box {
+            background: #e6f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .info-box p {
+            margin: 5px 0;
+            color: #004085;
+        }
+        
+        .card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .link-section {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+        
+        .status.active {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .status.inactive {
+            background: #cbd5e0;
+            color: #4a5568;
+        }
+        
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        input[type="checkbox"],
+        input[type="radio"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .image-item {
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-item .image-label {
+            padding: 10px;
+            background: white;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background: #f7fafc;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: #f7fafc;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Analytics Demo Page</h1>
+        <p class="subtitle">This page demonstrates the analytics tracking script with various interactive elements. All clicks and page views are being tracked.</p>
+        
+        <div class="info-box">
+            <p><strong>Status:</strong> <span id="status" class="status active">Tracking Active</span></p>
+            <p><strong>Session ID:</strong> <span id="sessionId">Loading...</span></p>
+            <p><strong>API Endpoint:</strong> http://localhost:3001/api/events</p>
+        </div>
+        
+        <div class="section">
+            <h2>Buttons and Actions</h2>
+            <p>Click on any button to generate click events:</p>
+            <div class="button-group">
+                <button onclick="showMessage('Primary button clicked')">Primary Button</button>
+                <button class="secondary" onclick="showMessage('Secondary button clicked')">Secondary Button</button>
+                <button class="danger" onclick="showMessage('Danger button clicked')">Danger Button</button>
+                <button onclick="addCard()">Add Dynamic Card</button>
+                <button onclick="window.location.reload()">Reload Page</button>
+                <button onclick="openModal()">Open Modal</button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Interactive Cards</h2>
+            <div id="cards-container">
+                <div class="card" onclick="showMessage('Card 1 clicked')">
+                    <h3>Card 1</h3>
+                    <p>Click anywhere on this card to generate a click event with coordinates.</p>
+                </div>
+                <div class="card" onclick="showMessage('Card 2 clicked')">
+                    <h3>Card 2</h3>
+                    <p>Each click is tracked with its X and Y coordinates relative to the viewport.</p>
+                </div>
+                <div class="card" onclick="showMessage('Card 3 clicked')">
+                    <h3>Card 3</h3>
+                    <p>Navigate to different sections or reload the page to see page view events.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Form Elements</h2>
+            <p>Interact with form elements - all clicks are tracked:</p>
+            <form onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="country">Country:</label>
+                    <select id="country" name="country">
+                        <option value="">Select a country</option>
+                        <option value="us">United States</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="ca">Canada</option>
+                        <option value="au">Australia</option>
+                        <option value="in">India</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Interests:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="interest" value="tech" /> Technology</label>
+                        <label><input type="checkbox" name="interest" value="sports" /> Sports</label>
+                        <label><input type="checkbox" name="interest" value="music" /> Music</label>
+                        <label><input type="checkbox" name="interest" value="travel" /> Travel</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="gender" value="male" /> Male</label>
+                        <label><input type="radio" name="gender" value="female" /> Female</label>
+                        <label><input type="radio" name="gender" value="other" /> Other</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" placeholder="Enter your message"></textarea>
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit">Submit Form</button>
+                    <button type="button" onclick="resetForm()">Reset</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="section">
+            <h2>Image Gallery</h2>
+            <p>Images automatically trigger <strong>image_view</strong> events when they load. Click on any image to track click events:</p>
+            <div class="image-container">
+                <div class="image-item" onclick="showMessage('Image 1 clicked')">
+                    <img src="https://images.pexels.com/photos/196667/pexels-photo-196667.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sample Image 1 - Desk workspace" />
+                    <div class="image-label">Image 1</div>
+                </div>
+                <div class="image-item" onclick="showMessage('Image 2 clicked')">
+                    <img src="https://images.pexels.com/photos/196655/pexels-photo-196655.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sample Image 2 - City skyline" />
+                    <div class="image-label">Image 2</div>
+                </div>
+                <div class="image-item" onclick="showMessage('Image 3 clicked')">
+                    <img src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sample Image 3 - Mountain landscape" />
+                    <div class="image-label">Image 3</div>
+                </div>
+                <div class="image-item" onclick="showMessage('Image 4 clicked')">
+                    <img src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sample Image 4 - Forest road" />
+                    <div class="image-label">Image 4</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Data Table</h2>
+            <p>Click on table rows or cells to track events:</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr onclick="showMessage('Row 1 clicked')">
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>Active</td>
+                            <td><button onclick="event.stopPropagation(); showMessage('Edit clicked')">Edit</button></td>
+                        </tr>
+                        <tr onclick="showMessage('Row 2 clicked')">
+                            <td>2</td>
+                            <td>Jane Smith</td>
+                            <td>Pending</td>
+                            <td><button onclick="event.stopPropagation(); showMessage('Edit clicked')">Edit</button></td>
+                        </tr>
+                        <tr onclick="showMessage('Row 3 clicked')">
+                            <td>3</td>
+                            <td>Bob Johnson</td>
+                            <td>Active</td>
+                            <td><button onclick="event.stopPropagation(); showMessage('Edit clicked')">Edit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Tab Navigation</h2>
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab(0)">Tab 1</button>
+                <button class="tab" onclick="switchTab(1)">Tab 2</button>
+                <button class="tab" onclick="switchTab(2)">Tab 3</button>
+            </div>
+            <div class="tab-content active" id="tab-0">
+                <p>Content for Tab 1. Click the tabs above to switch between content.</p>
+            </div>
+            <div class="tab-content" id="tab-1">
+                <p>Content for Tab 2. All tab clicks are being tracked.</p>
+            </div>
+            <div class="tab-content" id="tab-2">
+                <p>Content for Tab 3. Navigate between tabs to see multiple click events.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Navigation Links</h2>
+            <p>Click these links to simulate navigation (page views will be tracked):</p>
+            <div class="link-section">
+                <a href="#section1">Section 1</a>
+                <a href="#section2">Section 2</a>
+                <a href="#section3">Section 3</a>
+                <a href="?page=1">Page 1</a>
+                <a href="?page=2">Page 2</a>
+                <a href="?page=3">Page 3</a>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Event Types Being Tracked</h2>
+            <p>This demo page tracks the following event types:</p>
+            <ul style="margin: 15px 0; padding-left: 30px; line-height: 2;">
+                <li><strong>page_view</strong> - Automatically tracked on page load and navigation</li>
+                <li><strong>click</strong> - Tracked for all clicks on the page</li>
+                <li><strong>button_click</strong> - Specifically tracked for button elements (with button metadata)</li>
+                <li><strong>form_submit</strong> - Tracked when forms are submitted (submit the form above)</li>
+                <li><strong>input_change</strong> - Tracked when input fields change value (type in form fields above)</li>
+                <li><strong>input_focus</strong> - Tracked when inputs receive focus (click on form fields above)</li>
+                <li><strong>scroll</strong> - Tracked when page is scrolled (scroll this page)</li>
+                <li><strong>image_view</strong> - Tracked when images load (images in gallery above)</li>
+            </ul>
+            <p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
+                <strong>Tip:</strong> Interact with different elements above to generate various event types. Then check the dashboard to see all tracked events with their metadata.
+            </p>
+        </div>
+        
+        <div class="section">
+            <h2>View Dashboard</h2>
+            <p>View the analytics dashboard to see all tracked events:</p>
+            <a href="http://localhost:3000" target="_blank" style="background: #667eea; color: white; border: none; padding: 12px 24px;">
+                Open Dashboard
+            </a>
+        </div>
+    </div>
+    
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>Sample Modal</h2>
+            <p>This is a modal dialog. Click outside or the close button to dismiss.</p>
+            <div class="button-group">
+                <button onclick="closeModal()">Close</button>
+                <button class="secondary" onclick="showMessage('Modal action clicked')">Action</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        window.ANALYTICS_API_ENDPOINT = 'http://localhost:3001/api/events';
+        window.ANALYTICS_DEBUG = true; // Enable debug logging
+    </script>
+    
+    <script src="analytics.js"></script>
+    
+    <script>
+        function showMessage(msg) {
+            alert(msg);
+        }
+        
+        function addCard() {
+            const container = document.getElementById('cards-container');
+            const cardCount = container.children.length + 1;
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.onclick = function() { showMessage('Card ' + cardCount + ' clicked'); };
+            card.innerHTML = `
+                <h3>Card ${cardCount}</h3>
+                <p>This card was added dynamically. Click anywhere on it to track events!</p>
+            `;
+            container.appendChild(card);
+        }
+        
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            showMessage('Form submitted! Check the dashboard to see the click events.');
+        }
+        
+        function resetForm() {
+            document.querySelector('form').reset();
+            showMessage('Form reset');
+        }
+        
+        function openModal() {
+            document.getElementById('modal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+        
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        function switchTab(index) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach((tab, i) => {
+                if (i === index) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            contents.forEach((content, i) => {
+                if (i === index) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        }
+        
+        if (window.AnalyticsTracker) {
+            document.getElementById('sessionId').textContent = window.AnalyticsTracker.getSessionId();
+        }
+    </script>
+</body>
+</html>

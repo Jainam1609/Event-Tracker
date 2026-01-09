@@ -1,0 +1,23 @@
+node_modules/
+.DS_Store
+*.log
+.env
+.env.local
+.env.production
+.next/
+dist/
+build/
+*.swp
+*.swo
+*~
+
+# Python virtual environment (if using venv)
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Deployment
+.vercel
+.railway

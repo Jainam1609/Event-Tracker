@@ -1,0 +1,13 @@
+{
+  "name": "user-analytics-app",
+  "version": "1.0.0",
+  "description": "User Analytics Application with session tracking and dashboard",
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": ["analytics", "tracking", "dashboard"],
+  "author": "",
+  "license": "MIT"
+}
