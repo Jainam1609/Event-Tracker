@@ -221,7 +221,7 @@ http://localhost:3000/demo
 
 Or click the "Demo" link in the dashboard navigation. The tracking script will automatically start sending events to the backend.
 
-**Session Detection**: Since the demo page is on the same domain as the dashboard, sessions are shared via localStorage. Events from the demo page will appear in the same session as dashboard navigation events. See [SESSION_DETECTION.md](./SESSION_DETECTION.md) for details.
+**Session Detection**: Since the demo page is on the same domain as the dashboard, sessions are shared via localStorage. Events from the demo page will appear in the same session as dashboard navigation events. See [IMPLEMENTATION.md](./IMPLEMENTATION.md) for details.
 
 ## API Endpoints
 
@@ -327,7 +327,7 @@ Since the demo page is integrated into the dashboard at `/demo`, session detecti
 - **Unified Sessions**: Events from demo page appear in the same session as dashboard navigation
 - **No CORS Issues**: Everything on the same origin eliminates cross-origin restrictions
 
-See [SESSION_DETECTION.md](./SESSION_DETECTION.md) for detailed explanation.
+See [IMPLEMENTATION.md](./IMPLEMENTATION.md) for detailed explanation.
 
 ## Assumptions and Trade-offs
 
@@ -439,27 +439,30 @@ npm start
 - Check browser localStorage: `localStorage.getItem('analytics_session_id')`
 - Verify tracking script is loaded (check browser console)
 - Ensure demo page is on same domain as dashboard
-- See [SESSION_DETECTION.md](./SESSION_DETECTION.md) for details
+- See [IMPLEMENTATION.md](./IMPLEMENTATION.md) for session detection details
 
 ## Documentation
 
 - [README.md](./README.md) - This file
 - [SETUP.md](./SETUP.md) - Setup instructions and quick start
-- [DEPLOYMENT.md](./DEPLOYMENT.md) - Deployment guide (includes quick deploy and monorepo info)
-- [MONGODB_SETUP.md](./MONGODB_SETUP.md) - MongoDB installation guide
+- [DEPLOYMENT.md](./DEPLOYMENT.md) - Deployment guide
 - [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Troubleshooting guide
-- [IMPLEMENTATION.md](./IMPLEMENTATION.md) - Architecture and implementation details
-- [SESSION_DETECTION.md](./SESSION_DETECTION.md) - Session detection explanation
+- [IMPLEMENTATION.md](./IMPLEMENTATION.md) - Architecture, implementation details, and session detection
 
 ## Deployment
 
+**Live Application:**
+- **Frontend**: https://event-tracker-liart-psi.vercel.app
+- **Backend API**: https://event-tracker-dftf.onrender.com
+- **Health Check**: https://event-tracker-dftf.onrender.com/health
+
 **Monorepo Deployment**: Both backend and frontend are in one repository. Deploy both services from the same GitHub repo to different platforms.
 
-- **Frontend**: Deploy `frontend/` folder to [Vercel](https://vercel.com) (free tier, perfect for Next.js)
-- **Backend**: Deploy `backend/` folder to [Render](https://render.com) or [Railway](https://railway.app) (free tier)
-- **Database**: Use [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) (free tier - 512MB)
+- **Frontend**: Deployed on [Vercel](https://vercel.com) (free tier)
+- **Backend**: Deployed on [Render](https://render.com) (free tier)
+- **Database**: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) (free tier - 512MB)
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete deployment instructions including quick deploy guide and monorepo setup.
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete deployment instructions.
 
 ## License
 

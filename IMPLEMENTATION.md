@@ -210,6 +210,38 @@ Frontend (React/Next.js)
   - Demonstrates all event types
   - Same session shared with dashboard navigation
 
+## Session Detection
+
+Since the demo page is integrated into the dashboard (at `/demo` route), session detection works seamlessly across the entire application.
+
+### Session Storage Mechanism
+
+The tracking script uses **localStorage** to store session information:
+
+```javascript
+// Session data stored in browser's localStorage
+localStorage.setItem('analytics_session_id', 'session_1234567890_abc123');
+localStorage.setItem('analytics_session_id_timestamp', '1234567890');
+```
+
+### Key Points:
+
+1. **Same-Origin Storage**: 
+   - Since the demo page is at `http://localhost:3000/demo` and the dashboard is at `http://localhost:3000`, they share the same localStorage
+   - All events from both pages appear in the same session
+
+2. **Session Expiration**:
+   - Sessions expire after 30 minutes of inactivity
+   - New session is created automatically when old one expires
+
+3. **Session ID Format**:
+   - Format: `session_{timestamp}_{random}`
+   - Example: `session_1704067200000_abc123xyz`
+
+4. **Cross-Page Tracking**:
+   - Navigating between dashboard pages maintains the same session
+   - Events from demo page and dashboard pages are linked by session_id
+
 ## File Structure & Responsibilities
 
 ```
@@ -252,8 +284,7 @@ Assignment – Full Stack Engineer/
 ├── package.json                     # Root package.json
 ├── README.md                        # Main documentation
 ├── SETUP.md                         # Setup instructions
-├── SETUP.md                          # Setup and quick start guide
-├── MONGODB_SETUP.md                 # MongoDB installation guide
+├── DEPLOYMENT.md                    # Deployment guide
 ├── TROUBLESHOOTING.md               # Troubleshooting guide
 ├── IMPLEMENTATION.md                # This file
 └── setup.py                         # Automated setup script (Python)

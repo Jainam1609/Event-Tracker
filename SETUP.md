@@ -118,11 +118,29 @@ brew services start mongodb-community@8.0
 
 ### Option C: MongoDB Atlas (Cloud - Free)
 
-1. Sign up at https://www.mongodb.com/cloud/atlas
-2. Create a free cluster
-3. Update `backend/.env` with your Atlas connection string
-
-See [MONGODB_SETUP.md](./MONGODB_SETUP.md) for detailed instructions.
+1. **Sign up**: https://www.mongodb.com/cloud/atlas/register
+2. **Create Cluster**:
+   - Choose FREE (M0) tier
+   - Select your preferred region
+   - Create cluster (takes 3-5 minutes)
+3. **Configure Access**:
+   - Click "Database Access" → "Add New Database User"
+   - Create username and password (save these!)
+   - Set privileges to "Atlas admin" or "Read and write to any database"
+4. **Network Access**:
+   - Click "Network Access" → "Add IP Address"
+   - Click "Allow Access from Anywhere" (0.0.0.0/0) for development
+5. **Get Connection String**:
+   - Click "Connect" on your cluster
+   - Select "Drivers" → Choose "Node.js"
+   - Copy the connection string
+   - Replace `<password>` with your database user password
+   - Replace `<dbname>` with `analytics`
+   - **Important**: If password has special characters (like `@`), URL-encode them (`@` → `%40`)
+6. **Update `backend/.env`**:
+   ```
+   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/analytics?retryWrites=true&w=majority
+   ```
 
 ## 4. Start Backend (Terminal 1)
 
