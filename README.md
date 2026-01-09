@@ -223,6 +223,12 @@ Or click the "Demo" link in the dashboard navigation. The tracking script will a
 
 **Session Detection**: Since the demo page is on the same domain as the dashboard, sessions are shared via localStorage. Events from the demo page will appear in the same session as dashboard navigation events. See [IMPLEMENTATION.md](./IMPLEMENTATION.md) for details.
 
+## API Documentation
+
+Interactive API documentation is available via Swagger UI:
+- **Local**: http://localhost:3001/api-docs
+- **Production**: https://event-tracker-dftf.onrender.com/api-docs
+
 ## API Endpoints
 
 ### POST `/api/events`

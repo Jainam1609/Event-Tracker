@@ -4,6 +4,7 @@ This application is deployed and live:
 
 - **Frontend**: https://event-tracker-liart-psi.vercel.app
 - **Backend API**: https://event-tracker-dftf.onrender.com
+- **API Documentation (Swagger)**: https://event-tracker-dftf.onrender.com/api-docs
 - **Health Check**: https://event-tracker-dftf.onrender.com/health
 
 ## Monorepo Structure
