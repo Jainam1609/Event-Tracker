@@ -6,8 +6,11 @@ const connectDB = require('./config/database');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Connect to MongoDB
-connectDB();
+// Connect to MongoDB (with error handling)
+connectDB().catch((error) => {
+  console.error('Failed to connect to MongoDB:', error);
+  process.exit(1);
+});
 
 // Middleware
 const isProduction = process.env.NODE_ENV === 'production';

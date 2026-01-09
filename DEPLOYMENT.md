@@ -134,12 +134,38 @@ Redeploy both services after updating environment variables.
 
 1. **Check Backend**: Visit `https://your-backend.onrender.com/health`
    - Should return: `{"status":"ok","message":"Analytics API is running"}`
+   - If it fails, check Render logs for MongoDB connection errors
 
 2. **Check Frontend**: Visit `https://your-frontend.vercel.app`
    - Dashboard should load
    - Navigate to Demo page
    - Interact with elements
    - Check Sessions page for events
+
+## Troubleshooting Deployment Issues
+
+### Backend Exits with Status 1
+
+If your backend crashes on Render, check:
+
+1. **MongoDB Connection**:
+   - Verify `MONGODB_URI` is set in Render environment variables
+   - Check MongoDB Atlas Network Access allows `0.0.0.0/0` (all IPs)
+   - Verify connection string format: `mongodb+srv://user:pass@cluster.mongodb.net/analytics?retryWrites=true&w=majority`
+   - Make sure you replaced `<password>` with actual password
+
+2. **Check Render Logs**:
+   - Go to Render dashboard → Your service → Logs
+   - Look for MongoDB connection errors
+   - Common errors:
+     - "MONGODB_URI environment variable is not set"
+     - "MongoServerError: Authentication failed"
+     - "MongoServerSelectionError: connection timeout"
+
+3. **Environment Variables**:
+   - Double-check all environment variables are set correctly
+   - No extra spaces or quotes in values
+   - Connection string should be on one line
 
 ## Alternative Free Hosting Options
 
